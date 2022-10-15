@@ -30,11 +30,23 @@ mod my_module {
     use super::Command;
 
     // TODO: Complete the function signature!
-    pub fn transformer(input: ???) -> ??? {
+    pub fn transformer(input: Vector<(&str, Command)>) -> Vector<str> {
         // TODO: Complete the output declaration!
-        let mut output: ??? = vec![];
+        let mut output: Vector<str> = vec![];
         for (string, command) in input.iter() {
             // TODO: Complete the function body. You can do it!
+            if command == Command::Uppercase {
+                let bytes = string.as_bytes();
+                let mut restr = vec![];
+                for ch in bytes {
+                    if ch >= 97 && ch <= 122 {
+                        restr.append(ch-32);
+                    } else {
+                        restr.append(ch);
+                    }
+                }
+                output.append(String::from_utf8(restr));
+            }
         }
         output
     }
@@ -43,7 +55,7 @@ mod my_module {
 #[cfg(test)]
 mod tests {
     // TODO: What do we have to import to have `transformer` in scope?
-    use ???;
+    use my_module;
     use super::Command;
 
     #[test]
